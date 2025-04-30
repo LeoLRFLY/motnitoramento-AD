@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatísticas - Diretrizes de Aeronavegabilidade</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-blue-800 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold">Diretrizes Aeronavegabilidade</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+                        Início
+                    </a>
+                    <a href="diretrizes.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+                        Diretrizes
+                    </a>
+                    <a href="estatisticas.html" class="px-3 py-2 rounded-md text-sm font-medium bg-blue-700">
+                        Estatísticas
+                    </a>
+                    <a href="configuracoes.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+                        Configurações
+                    </a>
+                </div>
+                
+                <div class="md:hidden flex items-center">
+                    <button
+                        id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-blue-700 focus:outline-none"
+                    >
+                        <svg
+                            class="h-6 w-6"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">
+                    Início
+                </a>
+                <a href="diretrizes.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">
+                    Diretrizes
+                </a>
+                <a href="estatisticas.html" class="block px-3 py-2 rounded-md text-base font-medium bg-blue-700">
+                    Estatísticas
+                </a>
+                <a href="configuracoes.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">
+                    Configurações
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <div class="bg-gray-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-6">Estatísticas</h1>
+                
+                <div id="loading" class="flex justify-center items-center py-12">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                </div>
+                
+                <div id="stats-content" class="hidden">
+                    <!-- Resumo -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total de Diretrizes</h3>
+                            <p class="mt-2 text-3xl font-bold text-gray-900">156</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">ANAC (Brasil)</h3>
+                            <p class="mt-2 text-3xl font-bold text-gray-900">42</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">FAA (EUA)</h3>
+                            <p class="mt-2 text-3xl font-bold text-gray-900">68</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">EASA (Europa)</h3>
+                            <p class="mt-2 text-3xl font-bold text-gray-900">46</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Gráficos -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Diretrizes por Autoridade -->
+                        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Diretrizes por Autoridade</h3>
+                            <div class="space-y-4">
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">ANAC (Brasil)</span>
+                                        <span class="text-sm text-gray-600">42</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 62%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">FAA (EUA)</span>
+                                        <span class="text-sm text-gray-600">68</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">EASA (Europa)</span>
+                                        <span class="text-sm text-gray-600">46</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 68%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">TCCA (Canadá)</span>
+                                        <span class="text-sm text-gray-600">0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Diretrizes por Mês -->
+                        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Diretrizes por Mês (Últimos 6 meses)</h3>
+                            <div class="space-y-4">
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Abril 2025</span>
+                                        <span class="text-sm text-gray-600">28</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Março 2025</span>
+                                        <span class="text-sm text-gray-600">22</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 79%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Fevereiro 2025</span>
+                                        <span class="text-sm text-gray-600">18</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 64%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Janeiro 2025</span>
+                                        <span class="text-sm text-gray-600">25</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 89%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Dezembro 2024</span>
+                                        <span class="text-sm text-gray-600">15</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 54%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Novembro 2024</span>
+                                        <span class="text-sm text-gray-600">20</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 71%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Diretrizes Recentes -->
+                    <div class="bg-white rounded-lg shadow-md p-6 mt-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Diretrizes Mais Recentes</h3>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Autoridade
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Número
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Data
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Fabricante/Modelo
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Assunto
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr class="bg-white">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            ANAC
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            2025-04-01
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            01/04/2025
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Embraer - E190
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
+                                            Inspeção e substituição do componente de fixação da asa
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            FAA
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            2025-04-15
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            15/04/2025
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Boeing - 737 MAX
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
+                                            Atualização do software de controle de voo
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            EASA
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            2025-04-10
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            10/04/2025
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Airbus - A320neo
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
+                                            Verificação dos sistemas hidráulicos primários
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">
+                        Sistema de Monitoramento de Diretrizes de Aeronavegabilidade
+                    </p>
+                    <p class="text-xs text-gray-400 mt-1">
+                        Desenvolvido para monitorar ANAC, FAA, EASA e TCCA
+                    </p>
+                </div>
+                
+                <div class="flex flex-col md:flex-row md:space-x-6 text-sm">
+                    <a href="#" class="hover:text-blue-300 mb-2 md:mb-0">
+                        Termos de Uso
+                    </a>
+                    <a href="#" class="hover:text-blue-300 mb-2 md:mb-0">
+                        Política de Privacidade
+                    </a>
+                    <a href="#" class="hover:text-blue-300">
+                        Contato
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-4 pt-4 border-t border-gray-700 text-center text-xs text-gray-400">
+                <p>© 2025 Diretrizes de Aeronavegabilidade. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Simular carregamento de estatísticas
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('stats-content').classList.remove('hidden');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

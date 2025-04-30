@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diretrizes de Aeronavegabilidade</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-blue-800 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold">Diretrizes Aeronavegabilidade</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+                        Início
+                    </a>
+                    <a href="diretrizes.html" class="px-3 py-2 rounded-md text-sm font-medium bg-blue-700">
+                        Diretrizes
+                    </a>
+                    <a href="estatisticas.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+                        Estatísticas
+                    </a>
+                    <a href="configuracoes.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+                        Configurações
+                    </a>
+                </div>
+                
+                <div class="md:hidden flex items-center">
+                    <button
+                        id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-blue-700 focus:outline-none"
+                    >
+                        <svg
+                            class="h-6 w-6"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">
+                    Início
+                </a>
+                <a href="diretrizes.html" class="block px-3 py-2 rounded-md text-base font-medium bg-blue-700">
+                    Diretrizes
+                </a>
+                <a href="estatisticas.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">
+                    Estatísticas
+                </a>
+                <a href="configuracoes.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">
+                    Configurações
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <div class="bg-gray-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-6">Diretrizes de Aeronavegabilidade</h1>
+                
+                <div class="mb-8">
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <form id="search-form">
+                            <div class="flex flex-col md:flex-row gap-4">
+                                <div class="flex-grow">
+                                    <label for="search" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Buscar diretrizes
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="search"
+                                        placeholder="Digite fabricante, modelo ou assunto..."
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                </div>
+                                
+                                <div class="md:w-48">
+                                    <label for="authority" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Autoridade
+                                    </label>
+                                    <select
+                                        id="authority"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                        <option value="all">Todas</option>
+                                        <option value="anac">ANAC (Brasil)</option>
+                                        <option value="faa">FAA (EUA)</option>
+                                        <option value="easa">EASA (Europa)</option>
+                                        <option value="tcca">TCCA (Canadá)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="self-end">
+                                    <button
+                                        type="submit"
+                                        class="w-full md:w-auto px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                        Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Resultados da busca -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 id="search-title" class="text-xl font-semibold text-gray-800">
+                            Todas as Diretrizes
+                        </h2>
+                        <span id="results-count" class="text-gray-500">
+                            0 resultados
+                        </span>
+                    </div>
+                    
+                    <div id="loading" class="flex justify-center items-center py-12 hidden">
+                        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                    </div>
+                    
+                    <div id="error-message" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded hidden">
+                        <p>Erro ao carregar diretrizes.</p>
+                    </div>
+                    
+                    <div id="no-results" class="text-center py-12 hidden">
+                        <p class="text-gray-500 text-lg">Nenhuma diretriz encontrada.</p>
+                        <p class="text-gray-400 mt-2">Tente ajustar seus critérios de busca.</p>
+                    </div>
+                    
+                    <div id="directives-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Exemplo de cartão de diretriz -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                            ANAC (Brasil)
+                                        </span>
+                                        <h3 class="mt-2 text-lg font-semibold text-gray-900">2023-05-01</h3>
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        01/05/2023
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-600">
+                                        <span class="font-medium">Fabricante:</span> Embraer - E190
+                                    </p>
+                                    
+                                    <p class="mt-1 text-sm text-gray-700 line-clamp-2">
+                                        Inspeção e substituição do componente de fixação da asa
+                                    </p>
+                                </div>
+                                
+                                <div class="mt-4 flex justify-between items-center">
+                                    <a 
+                                        href="#" 
+                                        class="text-sm font-medium text-blue-600 hover:text-blue-800"
+                                    >
+                                        Ver documento completo
+                                    </a>
+                                    
+                                    <button
+                                        class="text-sm text-gray-500 hover:text-gray-700 toggle-details"
+                                    >
+                                        Mais detalhes
+                                    </button>
+                                </div>
+                                
+                                <div class="mt-4 pt-4 border-t border-gray-200 details-section hidden">
+                                    <h4 class="text-sm font-medium text-gray-900">Detalhes adicionais</h4>
+                                    <dl class="mt-2 text-sm">
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <dt class="text-gray-500">ID:</dt>
+                                            <dd class="col-span-2 text-gray-700">1</dd>
+                                        </div>
+                                        <div class="mt-1 grid grid-cols-3 gap-4">
+                                            <dt class="text-gray-500">Processado em:</dt>
+                                            <dd class="col-span-2 text-gray-700">01/05/2023</dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fim do exemplo -->
+                        
+                        <!-- Exemplo de cartão de diretriz 2 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                                            FAA (EUA)
+                                        </span>
+                                        <h3 class="mt-2 text-lg font-semibold text-gray-900">2023-10-12</h3>
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        12/10/2023
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-600">
+                                        <span class="font-medium">Fabricante:</span> Boeing - 737 MAX
+                                    </p>
+                                    
+                                    <p class="mt-1 text-sm text-gray-700 line-clamp-2">
+                                        Atualização do software de controle de voo
+                                    </p>
+                                </div>
+                                
+                                <div class="mt-4 flex justify-between items-center">
+                                    <a 
+                                        href="#" 
+                                        class="text-sm font-medium text-blue-600 hover:text-blue-800"
+                                    >
+                                        Ver documento completo
+                                    </a>
+                                    
+                                    <button
+                                        class="text-sm text-gray-500 hover:text-gray-700 toggle-details"
+                                    >
+                                        Mais detalhes
+                                    </button>
+                                </div>
+                                
+                                <div class="mt-4 pt-4 border-t border-gray-200 details-section hidden">
+                                    <h4 class="text-sm font-medium text-gray-900">Detalhes adicionais</h4>
+                                    <dl class="mt-2 text-sm">
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <dt class="text-gray-500">ID:</dt>
+                                            <dd class="col-span-2 text-gray-700">2</dd>
+                                        </div>
+                                        <div class="mt-1 grid grid-cols-3 gap-4">
+                                            <dt class="text-gray-500">Processado em:</dt>
+                                            <dd class="col-span-2 text-gray-700">12/10/2023</dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fim do exemplo 2 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">
+                        Sistema de Monitoramento de Diretrizes de Aeronavegabilidade
+                    </p>
+                    <p class="text-xs text-gray-400 mt-1">
+                        Desenvolvido para monitorar ANAC, FAA, EASA e TCCA
+                    </p>
+                </div>
+                
+                <div class="flex flex-col md:flex-row md:space-x-6 text-sm">
+                    <a href="#" class="hover:text-blue-300 mb-2 md:mb-0">
+                        Termos de Uso
+                    </a>
+                    <a href="#" class="hover:text-blue-300 mb-2 md:mb-0">
+                        Política de Privacidade
+                    </a>
+                    <a href="#" class="hover:text-blue-300">
+                        Contato
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-4 pt-4 border-t border-gray-700 text-center text-xs text-gray-400">
+                <p>© 2025 Diretrizes de Aeronavegabilidade. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Search form handling
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('search').value;
+            const authority = document.getElementById('authority').value;
+            
+            // Atualizar título da busca
+            const searchTitle = document.getElementById('search-title');
+            if (searchTerm) {
+                searchTitle.textContent = `Resultados para "${searchTerm}"`;
+            } else if (authority !== 'all') {
+                const authorityNames = {
+                    'anac': 'ANAC (Brasil)',
+                    'faa': 'FAA (EUA)',
+                    'easa': 'EASA (Europa)',
+                    'tcca': 'TCCA (Canadá)'
+                };
+                searchTitle.textContent = `Diretrizes da ${authorityNames[authority] || authority}`;
+            } else {
+                searchTitle.textContent = 'Todas as Diretrizes';
+            }
+            
+            // Simular busca (em uma aplicação real, isso faria uma chamada à API)
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('directives-grid').classList.add('hidden');
+            document.getElementById('no-results').classList.add('hidden');
+            document.getElementById('error-message').classList.add('hidden');
+            
+            // Simular tempo de carregamento
+            setTimeout(function() {
+                document.getElementById('loading').classList.add('hidden');
+                
+                // Simular resultados (em uma aplicação real, isso processaria os resultados da API)
+                if (Math.random() > 0.2) { // 80% de chance de mostrar resultados
+                    document.getElementById('directives-grid').classList.remove('hidden');
+                    document.getElementById('results-count').textContent = '2 resultados';
+                } else {
+                    document.getElementById('no-results').classList.remove('hidden');
+                    document.getElementById('results-count').textContent = '0 resultados';
+                }
+            }, 1000);
+        });
+        
+        // Toggle detalhes
+        document.querySelectorAll('.toggle-details').forEach(button => {
+            button.addEventListener('click', function() {
+                const detailsSection = this.closest('.p-4').querySelector('.details-section');
+                detailsSection.classList.toggle('hidden');
+                this.textContent = detailsSection.classList.contains('hidden') ? 'Mais detalhes' : 'Menos detalhes';
+            });
+        });
+        
+        // Processar parâmetros da URL na inicialização
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const q = urlParams.get('q');
+            const authority = urlParams.get('authority');
+            
+            if (q) {
+                document.getElementById('search').value = q;
+            }
+            
+            if (authority) {
+                document.getElementById('authority').value = authority;
+            }
+            
+            // Se houver parâmetros, simular uma busca
+            if (q || (authority && authority !== 'all')) {
+                document.getElementById('search-form').dispatchEvent(new Event('submit'));
+            }
+        });
+    </script>
+</body>
+</html>
